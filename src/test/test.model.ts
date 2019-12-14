@@ -5,14 +5,12 @@ import { ODataController, ODataServer, ODataProcessor, ODataMethodType, ODataRes
 import { Product, Category } from "./model/model";
 import { ProductPromise, CategoryPromise } from "./model/ModelsForPromise";
 import { GeneratorProduct, GeneratorCategory } from "./model/ModelsForGenerator";
-import { StreamProduct, StreamCategory } from "./model/ModelsForStream";
 import { Readable, PassThrough, Writable } from "stream";
 import { ObjectID } from "mongodb";
 import { processQueries, doOrderby, doSkip, doTop } from "./utils/queryOptions"
 import * as fs from "fs";
 import * as path from "path";
 import * as streamBuffers from "stream-buffers";
-const extend = require("extend");
 let categories = require("./model/categories").slice();
 let products = require("./model/products").slice();
 let categories2 = require("./model/categories").slice();
@@ -212,6 +210,16 @@ export class InlineCountController extends ODataController {
 }
 
 @odata.type(Foobar)
+export class NextLinkController extends ODataController {
+    @odata.GET
+    entitySet() {
+        let result = [{ id: 1, a: 1 }];
+        (<any>result).nextLink = "http://localhost/NextLinkEntitySet?$skip=1&$top=1";
+        return result;
+    }
+}
+
+@odata.type(Foobar)
 export class BoundOperationController extends ODataController {
     @Edm.Action
     Action() {
@@ -308,7 +316,10 @@ export class MusicController extends ODataController {
 
     @odata.GET.$value
     mp3( @odata.key _: number, @odata.context context: ODataHttpContext) {
-        globalReadableMediaStrBuffer.put(globalWritableMediaStrBuffer.getContents());
+        const contents = globalWritableMediaStrBuffer.getContents();
+        if (contents) {
+            globalReadableMediaStrBuffer.put(contents);
+        }
         return globalReadableMediaStrBuffer.pipe(<Writable>context.response);
     }
 
@@ -821,6 +832,10 @@ export class CategoriesAdvancedGeneratorController extends ODataController {
         response = yield doSkip(response, options);
         response = yield doTop(response, options);
 
+        if (query && query.raw && query.raw === "$top=2") {
+            (<any>response).nextLink = "http://localhost/GeneratorCategories('578f2baa12eaebabec4af28d')?$expand=GeneratorProducts($top=2&$skip=2)";
+        }
+
         return response
     }
 }
@@ -1017,6 +1032,7 @@ export class HiddenController extends ODataController { }
 @odata.controller(GeneratorTestController, "GeneratorEntitySet")
 @odata.controller(AsyncTestController, "AsyncEntitySet")
 @odata.controller(InlineCountController, "InlineCountEntitySet")
+@odata.controller(NextLinkController, "NextLinkEntitySet")
 @odata.controller(BoundOperationController, "BoundOperationEntitySet")
 @odata.controller(ImagesController, "ImagesControllerEntitySet")
 @odata.controller(MusicController, "MusicControllerEntitySet")

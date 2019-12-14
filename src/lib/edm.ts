@@ -129,10 +129,10 @@ export function Stream(this:any, target?:any){
         return function(target, targetKey){
             Reflect.defineMetadata(EdmMediaEntity, contentType, target, targetKey);
             typeDecoratorFactory("Edm.Stream")(target, targetKey);
-        }
+        };
     }
     return typeDecoratorFactory("Edm.Stream").apply(this, arguments);
-};
+}
 /** Edm.String primitive type property decorator */
 export const String = typeDecoratorFactory("Edm.String");
 /** Edm.TimeOfDay primitive type property decorator */
@@ -448,7 +448,7 @@ export const Nullable = (function Nullable(){
             }
             Reflect.defineMetadata(EdmNullableProperty, true, target, targetKey);
         }
-    }
+    };
 })();
 /** Returns true if property is nullable (decorated by Edm.Nullable) */
 export function isNullable(target:Function, propertyKey:string):boolean{
@@ -478,7 +478,7 @@ export const Required = (function Required(){
             }
             Reflect.defineMetadata(EdmNullableProperty, false, target, targetKey);
         }
-    }
+    };
 })();
 /** Returns true if property is required (decorated by Edm.Required) */
 export function isRequired(target:Function, propertyKey:string):boolean{
@@ -939,7 +939,7 @@ export function EnumType(type:any):Decorator{
             Reflect.defineMetadata(EdmEnumType, true, target, targetKey);
             Reflect.defineMetadata(EdmType, type, target, targetKey);
         }
-    }
+    };
 }
 export function isEnumType(target:any, propertyKey?:string):boolean{
     return typeof propertyKey == "string"
@@ -1165,5 +1165,5 @@ export const EdmContainerClass = <IEdmContainer>class{
         }
         return null;
     }
-}
+};
 export class ContainerBase extends EdmContainerClass{}

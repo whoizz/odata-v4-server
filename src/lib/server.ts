@@ -73,14 +73,14 @@ function ensureODataHeaders(req, res, next?){
 
 /** ODataServer base class to be extended by concrete OData Server data sources */
 export class ODataServerBase extends Transform{
-    private static _metadataCache:any
-    static namespace:string
+    private static _metadataCache:any;
+    static namespace:string;
     static container = new ContainerBase();
     static parser = ODataParser;
-    static connector:IODataConnector
+    static connector:IODataConnector;
     static validator:(odataQuery:string | Token) => null;
     static errorHandler:express.ErrorRequestHandler = ODataErrorHandler;
-    private serverType:typeof ODataServer
+    private serverType:typeof ODataServer;
 
     static requestHandler(){
         return (req:express.Request, res:express.Response, next:express.NextFunction) => {

@@ -1,8 +1,8 @@
 import { Readable, Writable } from "stream";
 
 export class ODataStream{
-    stream:any
-    contentType:string
+    stream:any;
+    contentType:string;
 
     constructor(contentType:string);
     constructor(stream:any, contentType?:string);
@@ -53,11 +53,11 @@ export interface IODataResult<T = {}>{
 }
 
 export class ODataResult<T = {}>{
-    statusCode:number
-    body:IODataResult<T> & T
-    elementType:Function
-    contentType:string
-    stream?:any
+    statusCode:number;
+    body:IODataResult<T> & T;
+    elementType:Function;
+    contentType:string;
+    stream?:any;
 
     constructor(statusCode:number, contentType?:string, result?:any){
         this.statusCode = statusCode;
@@ -76,7 +76,7 @@ export class ODataResult<T = {}>{
         }else{
             return Promise.resolve(new ODataResult(201, contentType, result));
         }
-    }
+    };
 
     static Ok = function Ok(result:any, contentType?:string):Promise<ODataResult>{
         let inlinecount;
@@ -119,5 +119,5 @@ export class ODataResult<T = {}>{
         }else{
             return Promise.resolve(new ODataResult(204, contentType));
         }
-    }
+    };
 }

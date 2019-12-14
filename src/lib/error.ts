@@ -8,7 +8,7 @@ export class CustomError extends Error{
 }
 
 export class HttpRequestError extends CustomError{
-    statusCode:number
+    statusCode:number;
     constructor(statusCode:number, message:string){
         super(message);
         this.statusCode = statusCode;

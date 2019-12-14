@@ -15,7 +15,7 @@ export const getAllPropertyNames = function(proto:any):string[]{
     if (proto !== Object.prototype && proto !== Transform.prototype) propNames = propNames.concat(getAllPropertyNames(proto));
     return propNames;
 };
-let GeneratorFunction;
+let GeneratorFunction: any;
 try{ GeneratorFunction = eval("(function*() {}).constructor"); }catch(err){}
 
 export function isIterator(value){

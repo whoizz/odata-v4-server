@@ -27,21 +27,21 @@ export interface ISelect {
 export const ODATA_TYPE = "@odata.type";
 export const ODATA_TYPENAME = "@odata.type.name";
 export class ResourcePathVisitor {
-    private serverType: typeof ODataServer
+    private serverType: typeof ODataServer;
     private entitySets: {
         [entitySet: string]: typeof ODataController
-    }
+    };
 
-    navigation: NavigationPart[]
-    select: ISelect
-    alias: any
-    path: string
-    singleton: string
-    inlinecount: boolean
-    id: string
-    ast: Token
-    navigationProperty: string
-    query: any
+    navigation: NavigationPart[];
+    select: ISelect;
+    alias: any;
+    path: string;
+    singleton: string;
+    inlinecount: boolean;
+    id: string;
+    ast: Token;
+    navigationProperty: string;
+    query: any;
     includes: {
         [navigationProperty: string]: ResourcePathVisitor
     } = {};
@@ -313,7 +313,7 @@ export class ResourcePathVisitor {
             node
         });
         this.path += "/$count";
-    };
+    }
 
     protected async VisitCollectionNavigation(node: Token, context: any, type: any) {
         context.isCollection = true;
@@ -400,7 +400,7 @@ export class ResourcePathVisitor {
         node[ODATA_TYPE] = Edm.getType(node[ODATA_TYPE], node.value.name, this.serverType.container);
         this.navigation.push({ name: node.value.name, type: node.type, node });
         this.path += "/" + node.value.name;
-    };
+    }
 
     protected VisitValueExpression(node: Token) {
         this.navigation.push({

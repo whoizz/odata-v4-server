@@ -4,9 +4,9 @@ import { ODataBase } from "./odata";
 import { getFunctionParameters } from "./utils";
 
 export class ODataControllerBase{
-    entitySetName:string
-    elementType:Function
-    static containerName:string
+    entitySetName:string;
+    elementType:Function;
+    static containerName:string;
     static validator:(odataQuery:string | Token) => null;
 
     static on(method:string, fn:Function | string, ...keys:string[]){

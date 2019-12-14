@@ -212,7 +212,7 @@ function odataMethodFactory(type: string, navigationProperty?: string): ODataMet
         let existingMethods: any[] = Reflect.getMetadata(ODataMethod, target, targetKey) || [];
         existingMethods.unshift(type);
         Reflect.defineMetadata(ODataMethod, existingMethods, target, targetKey);
-    }
+    };
     let createRefFn = function (navigationProperty) {
         let fn = odataMethodFactory(`${type}/${navigationProperty}`);
         (<RefExpressionDecorator>fn).$ref = function (target, targetKey) {
@@ -412,7 +412,7 @@ export function key(target: any, targetKey?: string, parameterIndex?: number): a
             to: paramName
         });
         Reflect.defineMetadata(ODataKeyParameters, existingParameters, target, targetKey);
-    }
+    };
 
     if (typeof target == "string" || typeof target == "undefined" || !target) {
         name = target;
@@ -453,7 +453,7 @@ export function link(target: any, targetKey?: string, parameterIndex?: number): 
             to: paramName
         });
         Reflect.defineMetadata(ODataLinkParameters, existingParameters, target, targetKey);
-    }
+    };
 
     if (typeof target == "string" || typeof target == "undefined" || !target) {
         name = target;
@@ -702,7 +702,7 @@ export function parameters(parameters: any) {
         for (let prop in parameters) {
             parameter(prop, parameters[prop])(target, targetKey);
         }
-    }
+    };
 }
 
 export interface IODataBase<T, C> {

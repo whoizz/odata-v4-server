@@ -22,7 +22,7 @@
     "test:validator": "nyc mocha --reporter mochawesome --reporter-options reportDir=report,reportName=odata-v4-server,reportTitle=\"OData V4 Server\" src/test/**/validator.spec.ts",
     "test:projection": "nyc mocha --reporter mochawesome --reporter-options reportDir=report,reportName=odata-v4-server,reportTitle=\"OData V4 Server\" src/test/**/projection.spec.ts",
     "prepare": "npm test && npm run build",
-    "typedoc": "rimraf docs && typedoc --name \"JayStack OData v4 Server\" --exclude \"**/?(utils|index).ts\" --excludeExternals --excludeNotExported --hideGenerator --excludePrivate --out docs src/lib"
+    "typedoc": "rimraf docs && typedoc --name \"OData v4 Server\" --exclude \"**/?(utils|index).ts\" --excludeExternals --excludeNotExported --hideGenerator --excludePrivate --out docs src/lib"
   },
   "watch": {
     "tsc": {
@@ -98,13 +98,12 @@
   },
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
-    "@types/deepmerge": "^2.1.0",
     "@types/event-stream": "^3.3.34",
     "@types/jsonstream": "^0.8.30",
     "@types/lodash": "^4.14.112",
     "@types/mocha": "^5.2.5",
-    "@types/mongodb": "^3.1.1",
-    "@types/node": "^10.5.2",
+    "@types/mongodb": "^3.3.8",
+    "@types/node": "^10.17.3",
     "@types/request": "^2.47.1",
     "@types/request-promise": "^4.1.42",
     "@types/stream-buffers": "^3.0.2",
@@ -122,18 +121,18 @@
     "nyc": "^12.0.2",
     "odata-v4-inmemory": "^0.1.9",
     "odata-v4-mongodb": "^0.1.12",
-    "remap-istanbul": "^0.11.1",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.6",
     "stream-buffers": "^3.0.2",
+    "true": "^0.0.4",
     "ts-node": "^7.0.0",
     "tslint": "^5.11.0",
-    "typedoc": "^0.11.1",
+    "typedoc": "^0.15.0",
     "typedoc-default-themes": "^0.5.0",
-    "typedoc-plugin-external-module-name": "^1.1.1",
-    "typescript": "^2.9.2",
+    "typedoc-plugin-external-module-name": "^2.1.0",
+    "typescript": "^3.6.4",
     "xml-beautifier": "^0.4.0"
   }
 }
